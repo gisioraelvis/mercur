@@ -79,10 +79,10 @@ git clone https://github.com/mercurjs/mercur.git
 cd mercur
 
 # Install dependencies
-yarn install
+pnpm install
 
 # Build packages
-yarn build
+pnpm build
 
 # Go to backend folder
 cd apps/backend
@@ -96,7 +96,7 @@ DATABASE_URL=postgres://[user]:[password]@[address]:[port]/$DB_NAME
 DATABASE_URL=postgres://postgres:postgres@localhost:5432/$DB_NAME
 
 # Setup database and run migrations
-yarn medusa db:create && yarn medusa db:migrate && yarn run seed
+pnpm medusa db:create && pnpm medusa db:migrate && pnpm run seed
 
 # Create admin user
 npx medusa user --email <email> --password <password>
@@ -105,8 +105,221 @@ npx medusa user --email <email> --password <password>
 cd ../..
 
 # Start Mercur
-yarn dev
+pnpm dev
 ```
+
+&nbsp;
+
+## Development Commands
+
+### Root Project Commands
+
+Run these from the root directory (`mercur/`):
+
+```bash
+# Start all services in development mode
+pnpm dev
+
+# Build the entire project (all packages)
+pnpm build
+
+# Run linting across all packages
+pnpm lint
+
+# Format code across all packages
+pnpm format
+
+# Generate OpenAPI specifications
+pnpm generate:oas
+
+# Alternative way to start development (same as pnpm dev)
+pnpm mercur-exec
+```
+
+### Backend-Specific Commands
+
+Navigate to the backend directory first:
+
+```bash
+cd apps/backend
+```
+
+Then run:
+
+```bash
+# Start backend in development mode
+pnpm dev
+
+# Build the backend only
+pnpm build
+
+# Start backend in production mode
+pnpm start
+
+# Database operations
+pnpm db:migrate          # Run database migrations
+pnpm seed               # Seed database with sample data
+
+# Testing
+pnpm test:unit          # Run unit tests
+pnpm test:integration:http    # Run HTTP integration tests
+pnpm test:integration:modules # Run module integration tests
+
+# Code quality
+pnpm lint               # Lint backend code
+pnpm lint:fix           # Fix linting issues automatically
+pnpm format             # Format backend code
+
+# Admin user management
+npx medusa user --email <email> --password <password>  # Create admin user
+```
+
+## First-Time Setup Guide
+
+### 1. Install Dependencies
+
+```bash
+cd mercur
+pnpm install
+```
+
+### 2. Build All Packages
+
+```bash
+pnpm build
+```
+
+### 3. Configure Environment
+
+```bash
+cd apps/backend
+cp .env.template .env
+# Edit .env file with your configuration:
+# - Database connection details
+# - API keys for integrations (Stripe, Resend, etc.)
+# - Other environment-specific settings
+```
+
+### 4. Database Setup
+
+```bash
+# Create database and run migrations
+pnpm medusa db:create && pnpm medusa db:migrate
+
+# Seed with sample data
+pnpm seed
+```
+
+### 5. Create Admin User
+
+```bash
+npx medusa user --email admin@example.com --password your-secure-password
+```
+
+### 6. Start Development
+
+```bash
+cd ../..  # Go back to root
+pnpm dev
+```
+
+## Accessing the Application
+
+After running `pnpm dev`, you can access:
+
+- **API Server**: `http://localhost:9000`
+- **Admin Panel**: `http://localhost:9000/app`
+- **API Documentation**: `http://localhost:9000/docs` (if enabled)
+
+## Package Management with pnpm
+
+### Workspace Commands
+
+```bash
+# Install dependencies for all packages
+pnpm install
+
+# Install a dependency to the root workspace
+pnpm add <package-name> -w
+
+# Install a dependency to a specific package
+pnpm add <package-name> --filter <package-name>
+
+# List all packages in the workspace
+pnpm list --depth=0 --recursive
+
+# Run a command in all packages
+pnpm -r <command>
+
+# Run a command in a specific package
+pnpm --filter <package-name> <command>
+```
+
+### Key Workspace Packages
+
+- `@mercurjs/framework` - Core framework utilities
+- `@mercurjs/marketplace` - Marketplace-specific functionality
+- `@mercurjs/seller` - Seller/vendor management
+- `@mercurjs/commission` - Commission calculation system
+- `@mercurjs/payout` - Payout management
+- `@mercurjs/reviews` - Review system
+- `@mercurjs/wishlist` - Wishlist functionality
+- And many more modules in `packages/modules/`
+
+## Troubleshooting
+
+### Common Issues
+
+**Build Errors:**
+
+```bash
+# Clean and rebuild
+pnpm build --force
+
+# Or clean node_modules and reinstall
+rm -rf node_modules pnpm-lock.yaml
+pnpm install
+pnpm build
+```
+
+**Database Connection Issues:**
+
+- Verify PostgreSQL is running
+- Check DATABASE_URL in `.env` file
+- Ensure database exists: `pnpm medusa db:create`
+
+**Port Conflicts:**
+
+- Check if ports 9000 (API) are available
+- Modify ports in `.env` if needed
+
+**Workspace Dependency Issues:**
+
+```bash
+# Reinstall all dependencies
+pnpm install --force
+```
+
+## Production Deployment
+
+For production deployment:
+
+```bash
+# Build all packages for production
+pnpm build
+
+# Start the backend in production mode
+cd apps/backend
+pnpm start
+```
+
+Make sure to:
+
+- Set `NODE_ENV=production` in your environment
+- Configure production database credentials
+- Set up proper reverse proxy (nginx, etc.)
+- Configure SSL certificates
+- Set up monitoring and logging
 
 &nbsp;
 
@@ -115,6 +328,7 @@ yarn dev
 - Node.js v20+
 - PostgreSQL
 - Git CLI
+- pnpm (installed via Corepack: `corepack enable`)
 
 # Resources
 
