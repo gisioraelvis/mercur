@@ -52,7 +52,7 @@ class SellerModuleService extends MedusaService({
   }
 
   async validateInviteToken(token: string) {
-    const jwtSecret = this.httpConfig_.jwtSecret;
+    const jwtSecret = this.httpConfig_.jwtSecret as string;
     const decoded: JwtPayload = jwt.verify(token, jwtSecret, {
       complete: true,
     });
