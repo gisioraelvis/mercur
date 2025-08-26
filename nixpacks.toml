@@ -1,0 +1,25 @@
+[build]
+cmd = 'pnpm install && pnpm build'
+
+[start]
+cmd = 'cd apps/backend && pnpm start'
+
+[variables]
+NODE_VERSION = '20'
+PNPM_VERSION = '9'
+
+[phases.setup]
+nixPkgs = ['nodejs-20_x', 'corepack']
+nixpkgsArchive = 'ba913eda2df8eb72147259951326cde8f86b73a0'
+
+[phases.install]
+dependsOn = ['setup']
+cmds = [
+  'corepack enable',
+  'corepack prepare pnpm@9 --activate',
+  'pnpm install --frozen-lockfile'
+]
+
+[phases.build]
+dependsOn = ['install']
+cmds = ['pnpm build']
