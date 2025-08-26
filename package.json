@@ -8,12 +8,7 @@
   "bin": {
     "mercur-exec": "./index.js"
   },
-  "packageManager": "yarn@1.22.21",
-  "workspaces": [
-    "apps/*",
-    "packages/*",
-    "packages/modules/*"
-  ],
+  "packageManager": "pnpm@9.0.0",
   "scripts": {
     "mercur-exec": "turbo run dev",
     "dev": "turbo run dev",
@@ -24,3 +19,4 @@
     "generate:oas": "turbo run generate:oas"
   }
 }
+

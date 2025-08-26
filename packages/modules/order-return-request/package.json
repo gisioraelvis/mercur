@@ -23,7 +23,7 @@
     "devDependencies": {
         "@medusajs/framework": "2.8.6",
         "@medusajs/test-utils": "2.8.6",
-        "@mercurjs/framework": "*",
+        "@mercurjs/framework": "workspace:*",
         "@mikro-orm/cli": "6.4.3",
         "@mikro-orm/core": "6.4.3",
         "@mikro-orm/migrations": "6.4.3",
