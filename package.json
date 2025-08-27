@@ -17,12 +17,6 @@
     "lint": "turbo run lint",
     "codegen": "cd .",
     "generate:oas": "turbo run generate:oas",
-    "railway:deploy": "railway up",
-    "railway:logs": "railway logs --follow",
-    "railway:db:migrate": "railway run --service backend pnpm db:migrate",
-    "railway:db:seed": "railway run --service backend pnpm seed",
-    "railway:user:create": "railway run --service backend npx medusa user",
-    "railway:connect:db": "railway connect PostgreSQL"
   },
   "dependencies": {
     "@babel/runtime": "^7.10.0",
