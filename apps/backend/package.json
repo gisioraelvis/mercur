@@ -13,17 +13,14 @@
     "medusa"
   ],
   "scripts": {
-    "build": "medusa build && (if not exist public mkdir public) && robocopy .medusa\\server\\public public /E /NFL /NDL /NJH /NJS /NP || echo Done",
-    "build:unix": "medusa build && ln -s .medusa/server/public/ public",
+    "build": "medusa build && ln -s .medusa/server/public/ public",
+    "build:windows": "medusa build && (if not exist public mkdir public) && robocopy .medusa\\server\\public public /E /NFL /NDL /NJH /NJS /NP || echo Done",
     "seed": "medusa exec ./src/scripts/seed.ts",
     "start": "medusa start --types=false",
     "dev": "medusa develop --types=false",
     "db:migrate": "medusa db:migrate",
     "db:create": "medusa db:create",
     "db:seed": "medusa exec ./src/scripts/seed.ts",
-    "railway:build": "medusa build",
-    "railway:start": "medusa start --types=false",
-    "railway:migrate": "medusa db:migrate",
     "test:integration:http": "TEST_TYPE=integration:http NODE_OPTIONS=--experimental-vm-modules jest --silent=false --runInBand --forceExit",
     "test:integration:modules": "TEST_TYPE=integration:modules NODE_OPTIONS=--experimental-vm-modules jest --silent --runInBand --forceExit",
     "test:unit": "TEST_TYPE=unit NODE_OPTIONS=--experimental-vm-modules jest --silent --runInBand --forceExit",
@@ -122,6 +119,6 @@
     "vite": "^5.2.11"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=18"
   }
 }
