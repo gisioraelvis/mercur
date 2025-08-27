@@ -10,7 +10,6 @@
   },
   "packageManager": "pnpm@9.0.0",
   "scripts": {
-    "mercur-exec": "turbo run dev",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "format": "turbo run format",
