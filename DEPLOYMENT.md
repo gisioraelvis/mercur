@@ -54,12 +54,7 @@ node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
 
 ### 4. Deploy
 
-```bash
-# Deploy from your local machine
-railway up
-
-# Or setup automatic deployment (see CI/CD section below)
-```
+Link project from GitHub for automatic deployments.
 
 ## Detailed Setup
 
@@ -100,26 +95,6 @@ railway run pnpm seed
 railway run npx medusa user --email admin@example.com --password secure-password
 ```
 
-## CI/CD Setup (Automatic Deployment)
-
-### 1. Setup GitHub Secrets
-
-In your GitHub repository → Settings → Secrets and variables → Actions:
-
-Add these secrets:
-
-- `RAILWAY_TOKEN`: Get from Railway dashboard → Account Settings → Tokens
-- `RAILWAY_SERVICE`: Your service ID from Railway (optional, for database commands)
-
-### 2. Automatic Deployment
-
-The GitHub Actions workflow (`.github/workflows/deploy.yml`) will:
-
-- ✅ Run tests on every push/PR
-- ✅ Deploy to Railway on push to `main` branch
-- ✅ Run database migrations automatically
-- ✅ Handle build caching for faster deployments
-
 ## Railway Configuration Files
 
 ### `railway.json`
@@ -141,29 +116,9 @@ The GitHub Actions workflow (`.github/workflows/deploy.yml`) will:
 }
 ```
 
-### `nixpacks.toml`
-
-```toml
-[build]
-cmd = 'pnpm install && pnpm build'
-
-[start]
-cmd = 'cd apps/backend && pnpm start'
-
-[variables]
-NODE_VERSION = '20'
-PNPM_VERSION = '9'
-```
-
-## Deployment Commands
+## Railway Commands
 
 ```bash
-# Deploy manually
-railway up
-
-# Deploy specific service
-railway up --service your-service-name
-
 # Check deployment status
 railway status
 
@@ -302,8 +257,9 @@ Before going live:
 
 **Quick Start Summary:**
 
-1. `railway login` → `railway link`
-2. Add PostgreSQL database in Railway dashboard
-3. Set environment variables in Railway dashboard
-4. `railway up`
-5. Done! Your marketplace is live 🚀
+1. Link project from GitHub for automatic deployments.
+2. Set up PostgreSQL database in Railway dashboard.
+3. Configure environment variables in Railway dashboard.
+4. `railway login` → `railway link`
+5. Use the various Railway CLI commands to check and manage deployment.
+6. Done! marketplace is live 🚀
